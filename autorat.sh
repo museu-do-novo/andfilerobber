@@ -1,7 +1,4 @@
 #! /bin/bash
-# Lista de dependências:
-
-dependencias=("adb")
 
 banner(){
     BLUE='\033[0;34m'
