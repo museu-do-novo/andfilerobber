@@ -1,0 +1,4 @@
+## useful adb commands:
+
+pull the complete file list:
+adb exec-out find /sdcard/ > filelist.txt 
