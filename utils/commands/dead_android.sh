@@ -2,54 +2,54 @@
 
 # Função para desinstalar todos os aplicativos desinstaláveis
 desinstalar_apps() {
-    echo "Iniciando desinstalação de aplicativos..."
+    echo "[*] Iniciando desinstalação de aplicativos..."
     adb shell pm list packages | awk -F ':' '{print $2}' | while read -r package; do
-        echo "Tentando desinstalar $package"
-        adb shell pm uninstall --user 0 "$package" || echo "Falha ao desinstalar $package"
+        echo "[*] Tentando desinstalar $package"
+        adb shell pm uninstall "$package" || echo "[!] Falha ao desinstalar $package"
     done
-    echo "Processo de desinstalação concluído."
+    echo "[*] Processo de desinstalação concluído."
 }
 
 # Função para desativar todos os aplicativos desativáveis
 desativar_apps() {
-    echo "Iniciando desativação de aplicativos..."
+    echo "[*] Iniciando desativação de aplicativos..."
     adb shell pm list packages | awk -F ':' '{print $2}' | while read -r package; do
-        echo "Tentando desativar $package"
-        adb shell pm disable-user --user 0 "$package" || echo "Falha ao desativar $package"
+        echo "[*] Tentando desativar $package"
+        adb shell pm disable-user "$package" || echo "[!] Falha ao desativar $package"
     done
-    echo "Processo de desativação concluído."
+    echo "[*] Processo de desativação concluído."
 }
 
 # Função para remover permissões críticas de todos os aplicativos
 remover_permissoes() {
-    echo "Iniciando remoção de permissões..."
+    echo "[*] Iniciando remoção de permissões..."
     adb shell pm list packages | awk -F ':' '{print $2}' | while read -r package; do
-        echo "Removendo permissões do $package"
-        adb shell pm revoke "$package" android.permission.INTERNET || echo "Falha ao revogar INTERNET de $package"
-        adb shell pm revoke "$package" android.permission.CAMERA || echo "Falha ao revogar CAMERA de $package"
+        echo "[*] Removendo permissões do $package"
+        adb shell pm revoke "$package" android.permission.INTERNET || echo "[!] Falha ao revogar INTERNET de $package"
+        adb shell pm revoke "$package" android.permission.CAMERA || echo "[!] Falha ao revogar CAMERA de $package"
     done
-    echo "Processo de remoção de permissões concluído."
+    echo "[*] Processo de remoção de permissões concluído."
 }
 
 # Função para corromper o estado dos aplicativos para forçar falhas
 corromper_estado() {
-    echo "Iniciando corrupção do estado dos aplicativos..."
+    echo "[*] Iniciando corrupção do estado dos aplicativos..."
     adb shell pm list packages | awk -F ':' '{print $2}' | while read -r package; do
-        echo "Corrompendo estado do $package"
-        adb shell appops set "$package" RUN_IN_BACKGROUND ignore || echo "Falha ao modificar $package"
-        adb shell appops set "$package" RUN_ANY_IN_BACKGROUND ignore || echo "Falha ao modificar $package"
+        echo "[*] Corrompendo estado do $package"
+        adb shell appops set "$package" RUN_IN_BACKGROUND ignore || echo "[!] Falha ao modificar $package"
+        adb shell appops set "$package" RUN_ANY_IN_BACKGROUND ignore || echo "[!] Falha ao modificar $package"
     done
-    echo "Processo de corrupção de estado concluído."
+    echo "[*] Processo de corrupção de estado concluído."
 }
 
 # Função para alternar repetidamente ativação e desativação
 alternar_estado() {
-    echo "Iniciando alternância de estado dos aplicativos..."
+    echo "[*] Iniciando alternância de estado dos aplicativos..."
     adb shell pm list packages | awk -F ':' '{print $2}' | while read -r package; do
-        echo "Alternando estado do $package"
-        adb shell pm disable-user --user 0 "$package" && sleep 2 && adb shell pm enable "$package"
+        echo "[*] Alternando estado do $package"
+        adb shell pm disable-user -"$package" && sleep 2 && adb shell pm enable "$package"
     done
-    echo "Processo de alternância concluído."
+    echo "[*] Processo de alternância concluído."
 }
 
 # Função principal para exibir menu e executar ações
@@ -69,8 +69,8 @@ main() {
         3) remover_permissoes ;;
         4) corromper_estado ;;
         5) alternar_estado ;;
-        6) echo "Saindo..."; exit 0 ;;
-        *) echo "Opção inválida. Tente novamente."; main ;;
+        6) echo "[!] Saindo..."; exit 0 ;;
+        *) clear; echo "[!] Opção inválida. Tente novamente."; main ;;
     esac
 }
 
