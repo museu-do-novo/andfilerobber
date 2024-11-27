@@ -78,7 +78,7 @@ mkdir -p "$path"
 
 log_message warning "INICIANDO..."
 
-# Pausar por 3 segundos
+# Pausar rapidamente
 sleep 1
 
 #================================================================================================
