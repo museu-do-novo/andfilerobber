@@ -174,13 +174,13 @@ check_for_updates() {
 # Função para exibir a ajuda  
 usage() {  
     echo "Uso: $0 [-p] [-c] [-a] [-f <extensão>] [-q] [-u] [-h]"  
-    echo "  -p          Executa o script fastpair.sh"  
-    echo "  -c          Executa o script fastconnect.sh"  
-    echo "  -a          Executa o script autorat (extração de arquivos)"  
-    echo "  -f <extensão> Executa o script andfilerob para a extensão especificada"  
-    echo "  -q          Modo silencioso (suprime mensagens não críticas)"  
-    echo "  -u          Verificar atualizações"  
-    echo "  -h          Exibe esta ajuda"  
+    echo "  -p              Executa o script fastpair.sh"  
+    echo "  -c              Executa o script fastconnect.sh"  
+    echo "  -a              Executa o script autorat (extração de arquivos)"  
+    echo "  -f <extensão>   Executa o script andfilerob para a extensão especificada"  
+    echo "  -q              Modo silencioso (suprime mensagens não críticas)"  
+    echo "  -u              Verificar atualizações"  
+    echo "  -h              Exibe esta ajuda"  
     exit 1  
 }  
 
